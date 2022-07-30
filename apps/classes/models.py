@@ -1,6 +1,6 @@
 from django.db import models
 
-from ..teacher.models import Teacher
+from ..teacher.models import UserTeacher
 from ..student.models import Student
 
 
@@ -13,7 +13,7 @@ class Classes(models.Model):
     )
 
     teacher = models.OneToOneField(
-        to=Teacher,
+        to=UserTeacher,
         related_name="classes",
         on_delete=models.SET_NULL,
         null=True

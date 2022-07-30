@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "apps.teacher",
     "apps.school",
     "apps.subject",
+    "apps.account",
 ]
 
 MIDDLEWARE = [
@@ -85,6 +86,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "teacher.UserTeacher"
 
 LANGUAGE_CODE = 'en-us'
 

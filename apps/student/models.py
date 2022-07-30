@@ -54,8 +54,10 @@ class Student(models.Model):
         blank=True,
         null=True
     )
-    
+
     objects: StudentManager = StudentManager()
 
     def __str__(self) -> str:
-        return f'{self.first_name} {self.objects.get_class()}'
+        if self.objects.get_class().exists():
+            return f'{self.first_name} {self.objects.get_class()}'
+        return self.first_name
