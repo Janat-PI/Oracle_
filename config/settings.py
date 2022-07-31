@@ -1,6 +1,7 @@
+import os.path
 from pathlib import Path
 
-from .helpers import django_settings
+from .helpers import django_settings, database_settings
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,12 +24,15 @@ INSTALLED_APPS = [
 
     # libs
     "rest_framework",
+    "phonenumber_field",
 
     # apps
-    "apps.class", 
+    "apps.classes",
     "apps.student",
     "apps.teacher",
-    "apps.school"
+    "apps.school",
+    "apps.subject",
+    "apps.account",
 ]
 
 MIDDLEWARE = [
@@ -46,7 +50,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -63,10 +67,16 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "postgres",
+        "USER": "postgres",
+        "PASSWORD": "postgres",
+        "HOST": "db", 
+        "PORT": 5432,  
     }
 }
+
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -83,6 +93,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "teacher.UserTeacher"
 
 LANGUAGE_CODE = 'en-us'
 
@@ -92,6 +103,18 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EMAIL_BACKEND = database_settings['EMAIL_BACKEND']
+EMAIL_HOST = database_settings['EMAIL_HOST']
+EMAIL_PORT = database_settings['EMAIL_PORT']
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = database_settings['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = database_settings['EMAIL_HOST_PASSWORD']

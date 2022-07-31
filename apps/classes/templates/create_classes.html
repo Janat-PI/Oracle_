@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block student %}
+
+    <div class="center">
+        <form method="post" >
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button >send</button>
+        </form>
+    </div>
+{% endblock %}

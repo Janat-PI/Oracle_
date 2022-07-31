@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+    
+
+    {% block student %}
+    <div class="row">
+    
+        {% for student in queryset  %}
+        <div class="card" style="width: 12rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">{{ student.first_name }}</h5>
+            <p class="card-text">{{ student.address }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{ student.email }}</li>
+            <li class="list-group-item">{{ student.full_name }}</li>
+            <li class="list-group-item">{{ student.sex }}</li>
+            </ul>
+            <div class="card-body">
+            <a href="/student/update/{{student.pk}}" class="card-link">Update link</a>
+            <a href="/student/delete/{{student.pk}}" class="card-link">Delete link</a>
+            </div>
+        </div>
+        {% endfor %}
+        
+    {% endblock student %}
