@@ -11,6 +11,10 @@ ____
 
 
 
+main_url = "teacher/profile"
+
+
+
 
 """
 Тестовое задание от компании Oracle Digital
