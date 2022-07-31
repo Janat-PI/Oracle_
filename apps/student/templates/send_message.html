@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+    
+
+    {% block student %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            <label for="some_text">some_text: </label>
+            <input id="some_text" type="text" name="some_text" maxlength="100" required>
+
+            <input type="submit" value="OK">
+
+        </form>
+
+    {% endblock %}

@@ -1,14 +1,13 @@
-from audioop import reverse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic import CreateView, UpdateView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 
 
-from .forms import StudentForm
+from .forms import StudentForm, SendForm
 from .models import Student
 
 
@@ -69,3 +68,31 @@ class FindStudentView(View):
             "find_student.html",
             locals()
         )
+
+
+class SendMessageView(View):
+
+    
+    def get(self, request, pk: int):
+        
+        student = get_object_or_404(Student, pk=pk)
+        user = request.user 
+    
+        return render(
+            request,
+            "send_message.html",
+            locals()
+        )
+    
+    def post(self, request, pk: int = None):
+        student = get_object_or_404(Student, pk=pk)
+        data = request.POST
+        form = SendForm(data=data, request=request, email=student.email)
+        if form.is_valid():
+            form.save()
+            return redirect("teacher:profile")
+        return HttpResponse("произошла проблема!!!")
+
+
+        
+        

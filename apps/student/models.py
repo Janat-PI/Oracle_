@@ -1,4 +1,7 @@
 from django.db import models
+from django.db.models.signals import post_save
+
+from .helpers import post_send_email_for_student
 
 
 class StudentManager(models.Manager):
@@ -68,3 +71,6 @@ class Student(models.Model):
         # if self.objects.get_class().exists():
         #     return f'{self.first_name} {self.objects.get_class()}'
         return f' {self.pk} {self.first_name}'
+
+
+post_save.connect(post_send_email_for_student, Student)

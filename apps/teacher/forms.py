@@ -38,10 +38,11 @@ class RegistrationForm(forms.ModelForm):
                                        required=True)
 
     username = forms.CharField(max_length=255, required=True)
+    email = forms.CharField(max_length=255, required=True)
     
     class Meta:
         model = UserTeacher
-        fields = ["number_phone", 'username', 'password', 'password_confirm',
+        fields = ["number_phone", "email", 'username', 'password', 'password_confirm',
                   'first_name', 'last_name']
 
     def clean_number_phone(self):
@@ -58,5 +59,5 @@ class RegistrationForm(forms.ModelForm):
         return self.cleaned_data
 
     def save(self):
-        user = UserTeacher.objects.create(**self.cleaned_data)
+        user = UserTeacher.objects.create_user(**self.cleaned_data)
         return user
