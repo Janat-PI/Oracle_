@@ -19,10 +19,9 @@ class Classes(models.Model):
         null=True
     )
 
-    students = models.ForeignKey(
+    students = models.ManyToManyField(
         to=Student,
         related_name="classes",
-        on_delete=models.CASCADE
     )
 
     def __str__(self) -> str:

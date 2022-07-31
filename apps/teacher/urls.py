@@ -2,6 +2,7 @@ from django.urls import path
 
 from .views import RegisterView, ProfileView, SignIn
 
+app_name = 'teacher'
 
 urlpatterns = [
     path("register/", RegisterView.as_view()),

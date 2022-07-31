@@ -6,7 +6,7 @@
     
         {% for student in student_list  %}
         <div class="card" style="width: 12rem;">
-            <img src="{{ student.image.url }}" class="card-img-top" alt="...">
+            <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
             <h5 class="card-title">{{ student.first_name }}</h5>
             <p class="card-text">{{ student.address }}</p>
@@ -15,7 +15,6 @@
             <li class="list-group-item">{{ student.email }}</li>
             <li class="list-group-item">{{ student.full_name }}</li>
             <li class="list-group-item">{{ student.sex }}</li>
-            <li class="list-group-item">{{ student.classes__title }}</li>
             </ul>
             <div class="card-body">
             <a href="/student/update/{{student.pk}}" class="card-link">Update link</a>
@@ -23,5 +22,5 @@
             </div>
         </div>
         {% endfor %}
-
+        
     {% endblock student %}

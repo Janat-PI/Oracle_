@@ -1,9 +1,17 @@
 from django.urls import path
 
-from .views import CreateView
+from .views import (
+    CreateStudentView, ReadStudentView, 
+    DeleteStudentView, UpdateStudentView,
+    FindStudentView,
+)
 
+app_name = "student"
 
 urlpatterns = [
-    path("create/", CreateView.as_view()),
-    # path("profile/", ProfileView.as_view(), name="profile")
+    path("create/", CreateStudentView.as_view()),
+    path("read/", ReadStudentView.as_view()),
+    path("delete/<int:pk>/", DeleteStudentView.as_view(), name="delete"),
+    path("update/<int:pk>/", UpdateStudentView.as_view(), name="update"),
+    path("find/", FindStudentView.as_view(), name="find")
 ]

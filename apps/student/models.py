@@ -5,6 +5,7 @@ class StudentManager(models.Manager):
 
     def get_class(self):
         return self.classes.all()
+        
 
 
 class Student(models.Model):
@@ -29,6 +30,12 @@ class Student(models.Model):
         null=True
     )
 
+    email = models.EmailField(
+        "email",
+        unique=True,
+        default="test@gmail.com"
+    )
+
     date_of_birth = models.DateField(
         "date_of_birth",
         blank=True,
@@ -51,13 +58,13 @@ class Student(models.Model):
 
     image = models.ImageField(
         "students/",
-        blank=True,
+        blank=True, 
         null=True
     )
 
     objects: StudentManager = StudentManager()
 
     def __str__(self) -> str:
-        if self.objects.get_class().exists():
-            return f'{self.first_name} {self.objects.get_class()}'
-        return self.first_name
+        # if self.objects.get_class().exists():
+        #     return f'{self.first_name} {self.objects.get_class()}'
+        return f' {self.pk} {self.first_name}'

@@ -1,7 +1,6 @@
-from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth import authenticate
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
-
 
 from .models import UserTeacher
 
@@ -28,12 +27,6 @@ class CustomAuthenticationForm(AuthenticationForm):
 
 
 
-class TeacherForm(forms.ModelForm):
-    
-    class Meta:
-        model = UserTeacher
-        fields = "__all__"
-
 
 class RegistrationForm(forms.ModelForm):
 
@@ -57,11 +50,6 @@ class RegistrationForm(forms.ModelForm):
             raise forms.ValidationError('Пользователь уже зарегистрирован')
         return number_phone
 
-    # def clean_username(self):
-    #     username = self.cleaned_data.get('username')
-    #     if not username:
-    #         raise forms.ValidationError('username уже зарегистрирован')
-
     def clean(self):
         password = self.cleaned_data.get('password')
         password_confirm = self.cleaned_data.pop('password_confirm')
@@ -71,6 +59,4 @@ class RegistrationForm(forms.ModelForm):
 
     def save(self):
         user = UserTeacher.objects.create(**self.cleaned_data)
-        # user.create_activation_code()
-        # send_activation_mail(user.email, user.activation_code)
         return user
