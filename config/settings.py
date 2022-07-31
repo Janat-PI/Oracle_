@@ -1,7 +1,7 @@
 import os.path
 from pathlib import Path
 
-from .helpers import django_settings
+from .helpers import django_settings, database_settings
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -65,14 +65,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
@@ -120,9 +112,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
+EMAIL_BACKEND = database_settings['EMAIL_BACKEND']
+EMAIL_HOST = database_settings['EMAIL_HOST']
+EMAIL_PORT = database_settings['EMAIL_PORT']
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'janat.200066@gmail.com'
-EMAIL_HOST_PASSWORD = 'fttgjmdsgspdtjux'
+EMAIL_HOST_USER = database_settings['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = database_settings['EMAIL_HOST_PASSWORD']
